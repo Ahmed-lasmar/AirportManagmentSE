@@ -7,8 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AM.ApplicationCore\AM.ApplicationCore.csproj" />
-  </ItemGroup>
-
 </Project>
