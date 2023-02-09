@@ -39,4 +39,3 @@
   </main>
 </body>
 </html>
-(/tables.png?raw=true "Title")
