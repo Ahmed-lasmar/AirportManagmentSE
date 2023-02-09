@@ -9,7 +9,7 @@
   </header>
   <main>
     <p>This project aims to create a management application for airport activities, as defined by the class diagram below.</p>
-    <img src="/tables.png">
+    <img src="https://www.linkpicture.com/view.php?img=LPic63e503e4cbc061580866958">
     
     <h2>I Implementation of the Data Layer</h2>
     <ol>
