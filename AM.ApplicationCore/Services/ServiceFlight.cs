@@ -26,44 +26,32 @@ namespace AM.ApplicationCore.Services
         //}
 
         /// methode foreach
-        public List<DateTime> GetFlightDates(String destination)
+        public IEnumerable<DateTime> GetFlightdates(string destination)
         {
-            List<DateTime> result = new List<DateTime>();
-            foreach (var flight in Flights)
-            {
-                if (flight.Destination.Equals(destination))
-                {
-                    result.Add(flight.FlightDate);
-                }
-            }
-            return result;
+            var query = from flight in Flights
+                        where flight.Destination == destination
+                        select flight.FlightDate;
+            return query;
         }
 
-
+        public int ProgrammedFlightNumber(DateTime startDate)
+        {
+            var query = from flight in Flights
+                        where flight.FlightDate > startDate && flight.FlightDate < startDate.AddDays(7)
+                        select flight;
+            return query.Count();
+        }
 
         public void ShowFlightDetails(Plane plane)
         {
-            foreach (var flight in Flights)
+            var query = from flight in Flights
+                        where flight.Plane == plane
+                        select flight;
+            foreach (var item in query)
             {
-                if (flight.Plane == plane)
-                {
-
-                    Console.WriteLine(" Destination --> " + flight.Destination + " dans le date ---> " + flight.FlightDate);
-                }
+                Console.WriteLine(item.FlightDate);
+                Console.WriteLine(item.Destination);
             }
-        }
-
-        public int ProgrammedFlighNumber(DateTime startDate)
-        {
-            int result = 0;
-            foreach (var flight in Flights)
-            {
-                if (flight.FlightDate >= startDate && flight.FlightDate <= startDate.AddDays(7))
-                {
-                    result++;
-                }
-            }
-            return result;
         }
 
         public float DurationAverage(string destination)
@@ -91,6 +79,8 @@ namespace AM.ApplicationCore.Services
             }
             return flights;
         }
+
+
 
         public void GetFlights(string filterType, string filterValue)
         {
