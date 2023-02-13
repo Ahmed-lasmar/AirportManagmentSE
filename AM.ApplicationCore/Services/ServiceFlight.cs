@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AM.ApplicationCore.Services
 {
-    internal class ServiceFlight
+    public class ServiceFlight
     {
         public List<Flight> Flights { get; set; } = new List<Flight>();
 
@@ -74,7 +74,7 @@ namespace AM.ApplicationCore.Services
             {
                 if (flight.Destination.Equals(destination))
                 {
-                    result = (result + flight.);
+                    result = result + flight.EstimatedDuration;
                     i++;
                 }
             }
@@ -101,7 +101,7 @@ namespace AM.ApplicationCore.Services
                     {
                         if (item.Destination == filterValue)
                         {
-                            Console.WriteLine(item.ToString);
+                            Console.WriteLine(item.ToString());
                         }
                     }
                     break;
@@ -110,7 +110,7 @@ namespace AM.ApplicationCore.Services
                     {
                         if (item.FlightDate == DateTime.Parse(filterValue))
                         {
-                            Console.WriteLine(item.ToString);
+                            Console.WriteLine(item.ToString());
                         }
                     }
                     break;
@@ -128,7 +128,7 @@ namespace AM.ApplicationCore.Services
                     {
                         if (item.FlightID == int.Parse(filterValue))
                         {
-                            Console.WriteLine(item.ToString);
+                            Console.WriteLine(item.ToString());
                         }
                     }
                     break;
