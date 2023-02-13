@@ -92,7 +92,7 @@ namespace AM.ApplicationCore.Services
             return flights;
         }
 
-        public List<Flight> GetFlights(string filterType, string filterValue)
+        public void GetFlights(string filterType, string filterValue)
         {
             switch (filterType)
             {
@@ -126,14 +126,13 @@ namespace AM.ApplicationCore.Services
                 case "Flightid":
                     foreach (var item in Flights)
                     {
-                        if (item.FlightID == filterValue)
+                        if (item.FlightID == int.Parse(filterValue))
                         {
                             Console.WriteLine(item.ToString);
                         }
                     }
                     break;
             }
-            return null;
         }
     }
 }
