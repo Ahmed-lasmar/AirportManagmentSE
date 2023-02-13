@@ -91,5 +91,49 @@ namespace AM.ApplicationCore.Services
             }
             return flights;
         }
+
+        public List<Flight> GetFlights(string filterType, string filterValue)
+        {
+            switch (filterType)
+            {
+                case "destination":
+                    foreach (var item in Flights)
+                    {
+                        if (item.Destination == filterValue)
+                        {
+                            Console.WriteLine(item.ToString);
+                        }
+                    }
+                    break;
+                case "FlightDate":
+                    foreach (var item in Flights)
+                    {
+                        if (item.FlightDate == DateTime.Parse(filterValue))
+                        {
+                            Console.WriteLine(item.ToString);
+                        }
+                    }
+                    break;
+                case "departure":
+                    foreach (var item in Flights)
+                    {
+                        if (item.Departure == filterValue)
+                        {
+                            Console.WriteLine(item.FlightDate);
+                        }
+                    }
+                    break;
+                case "Flightid":
+                    foreach (var item in Flights)
+                    {
+                        if (item.FlightID == filterValue)
+                        {
+                            Console.WriteLine(item.ToString);
+                        }
+                    }
+                    break;
+            }
+            return null;
+        }
     }
 }
