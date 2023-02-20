@@ -199,9 +199,13 @@ namespace AM.ApplicationCore.Services
             //FlightDetailsDel = ShowFlightDetails;
             //DurationAverageDel = DurationAverage;
             FlightDetailsDel = p => {
+
+
                 var query = from flight in Flights
                             where flight.Plane == p
                             select flight;
+
+
                 foreach (var item in query)
                 {
                     Console.WriteLine(item.FlightDate);
