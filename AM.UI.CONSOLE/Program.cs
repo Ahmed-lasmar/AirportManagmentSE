@@ -1,23 +1,54 @@
 ﻿using AM.ApplicationCore.Domain;
 using AM.ApplicationCore.Services;
 
-Console.WriteLine("Hello, World!");
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        //Console.WriteLine("Hello, World!");
+        ////Plane p1= new Plane();
+        ////p1.Capacity = 200;
+        ////p1.PlaneID = 1;
+        ////p1.ManufactureDate = new DateTime(2023, 02, 02);
+        ////p1.PlaneType = PlaneType.Boing;
+        ////Plane p2 = new Plane(PlaneType.Airbus,200,DateTime.Now) ;
+        //Plane p3 = new Plane()
+        //{
+        //    PlaneType = PlaneType.Airbus,
+        //    Capacity= 100,
+        //    ManufactureDate=DateTime.Now,
+        //};
+        //Passenger passenger = new Passenger()
+        //{
+        //    FirstName = "Steve",
+        //    LastName = "Foxx",
+        //    EmailAddress = "boxingUK@gmail.com",
+        //};
+        //Console.WriteLine(passenger.CheckProfile("Steve", "Foxx", "boxingUK@gmail.com"));
+        //Traveller traveller = new Traveller()
+        //{
+        //    FirstName="Touhemi",
+        //    LastName="Toukebri",
+        //    EmailAddress = "boxingUK@gmail.com",
+        //    HealthInformation = "Gucci",
+        //    Nationality="Disney"
+        //};
+        //Staff staff = new Staff()
+        //{
+        //    FirstName = "Miguel",
+        //    LastName = "Foxx",
+        //    EmailAddress = "boxingUK@gmail.com",
+        //};
+        //Console.WriteLine("uno");
+        //staff.PassengerType();
+        //Console.WriteLine("duo");
+        //traveller.PassengerType();
+        //Console.WriteLine("trio");
+        //passenger.PassengerType();
 
-
-Plane p = new Plane();
-Plane p1 = new Plane();
-
-ServiceFlight sf = new ServiceFlight();
-sf.Flights = TestData.listFlights;
-
-foreach (var item in sf.GetFlightDates("Paris"))
-    Console.WriteLine(item);
-
-
-sf.ShowFlightDetails(TestData.BoingPlane);
-
-Console.WriteLine(sf.ProgrammedFlighNumber(new DateTime(2022, 05, 01, 17, 10, 10)));
-
-Console.WriteLine(sf.DurationAverage("Paris"));
-
-sf.GetFlights("destination", "Paris");
+        ServiceFlight serviceFlight = new ServiceFlight();
+        serviceFlight.Flights = TestData.listFlights;
+        //foreach (var item in serviceFlight.GetFlightDates("Paris"))
+        serviceFlight.DestinationGroupedFlights();
+    }
+}

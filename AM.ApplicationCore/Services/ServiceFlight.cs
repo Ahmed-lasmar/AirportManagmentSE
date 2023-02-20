@@ -1,4 +1,5 @@
 ﻿using AM.ApplicationCore.Domain;
+using AM.ApplicationCore.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,25 +8,86 @@ using System.Threading.Tasks;
 
 namespace AM.ApplicationCore.Services
 {
-    public class ServiceFlight
+    public class ServiceFlight : IServiceFlight
     {
         public List<Flight> Flights { get; set; } = new List<Flight>();
 
-
-        //public List<DateTime> GetFlightDates(String destination)
+        //public List<DateTime> GetFlightDates(string destination)
         //{
-        //    List<DateTime> result = new List<DateTime>();
-        //    for (int i = 0; i < Flights.Count; i++)
-        //    {
-        //        if (Flights[i].Destination.Equals(destination))
-        //        {
-        //            result.Add(Flights[i].FlightDate);
-        //        }
-        //    }
-        //    return result;
+        //    //List<DateTime> result = new List<DateTime>();
+        //    //for (int i = 0;i<Flights.Count();i++)
+        //    //{
+        //    //    if (Flights[i].Destination == destination)
+        //    //    {
+        //    //        result.Add(Flights[i].FlightDate);
+        //    //    }
+        //    //}
+        //    //return result;
         //}
+        public void GetFlightDates(string destination)
+        {
+            foreach (var item in Flights)
+            {
+                if (item.Destination == destination)
+                {
+                    Console.WriteLine(item.FlightDate);
+                }
+            }
+        }
 
-        /// methode foreach
+        public void GetFlights(string filterType, string filterValue)
+        {
+            switch (filterType)
+            {
+                case "destination":
+                    foreach (var item in Flights)
+                    {
+                        if (item.Destination == filterValue)
+                        {
+                            Console.WriteLine(item);
+                        }
+                    }
+                    break;
+                case "FlightDate":
+                    foreach (var item in Flights)
+                    {
+                        if (item.FlightDate == DateTime.Parse(filterValue))
+                        {
+                            Console.WriteLine(item);
+                        }
+                    }
+                    break;
+                case "departure":
+                    foreach (var item in Flights)
+                    {
+                        if (item.Departure == filterValue)
+                        {
+                            Console.WriteLine(item);
+                        }
+                    }
+                    break;
+                case "Flightid":
+                    foreach (var item in Flights)
+                    {
+                        if (item.FlightID == int.Parse(filterValue))
+                        {
+                            Console.WriteLine(item);
+                        }
+                    }
+                    break;
+                case "PlaneId":
+                    foreach (var item in Flights)
+                    {
+                        if (item.Plane.PlaneID == int.Parse(filterValue))
+                        {
+                            Console.WriteLine(item);
+                        }
+                    }
+                    break;
+
+            }
+        }
+
         public IEnumerable<DateTime> GetFlightdates(string destination)
         {
             var query = from flight in Flights
@@ -37,7 +99,7 @@ namespace AM.ApplicationCore.Services
         public int ProgrammedFlightNumber(DateTime startDate)
         {
             var query = from flight in Flights
-                        where flight.FlightDate > startDate && flight.FlightDate < startDate.AddDays(7)
+                        where flight.FlightDate >= startDate && flight.FlightDate <= startDate.AddDays(7)
                         select flight;
             return query.Count();
         }
@@ -53,76 +115,49 @@ namespace AM.ApplicationCore.Services
                 Console.WriteLine(item.Destination);
             }
         }
-
-        public float DurationAverage(string destination)
+        public double DurationAverage(string destination)
         {
-            float result = 0;
-            int i = 0;
-            foreach (var flight in Flights)
+            var query = from flight in Flights
+                        where flight.Destination == destination
+                        select flight.EstimatedDuration;
+            return query.Average();
+        }
+        public IEnumerable<Flight> OrderedDurationFlights()
+        {
+            var query = from flight in Flights
+                        orderby flight.EstimatedDuration descending
+                        select flight;
+            return query;
+        }
+
+        public IEnumerable<Traveller> SeniorTravellers(Flight flight)
+        {
+            var query = from traveler in flight.Passengers.OfType<Traveller>()
+                        orderby traveler.BirthDate
+                        select traveler;
+            return query.Take(3);
+        }
+        public IEnumerable<IGrouping<string, Flight>> DestinationGroupedFlights()
+        {
+            var query = from flight in Flights
+                        group flight by flight.Destination;
+            foreach (var group in query)
             {
-                if (flight.Destination.Equals(destination))
+                Console.WriteLine("Destination " + group.Key);
+                foreach (var item in group)
                 {
-                    result = result + flight.EstimatedDuration;
-                    i++;
+                    Console.WriteLine("Decollage :" + item.FlightDate);
                 }
             }
-            return result / i;
-        }
+            return query;
 
-        public List<Flight> OrderedDurationFlights()
-        {
-            List<Flight> flights = new List<Flight>();
 
-            foreach (var flight in Flights)
-            {
-                //flights.Add(flight.EstimatedDuration);
-            }
-            return flights;
         }
 
 
 
-        public void GetFlights(string filterType, string filterValue)
-        {
-            switch (filterType)
-            {
-                case "destination":
-                    foreach (var item in Flights)
-                    {
-                        if (item.Destination == filterValue)
-                        {
-                            Console.WriteLine(item.ToString());
-                        }
-                    }
-                    break;
-                case "FlightDate":
-                    foreach (var item in Flights)
-                    {
-                        if (item.FlightDate == DateTime.Parse(filterValue))
-                        {
-                            Console.WriteLine(item.ToString());
-                        }
-                    }
-                    break;
-                case "departure":
-                    foreach (var item in Flights)
-                    {
-                        if (item.Departure == filterValue)
-                        {
-                            Console.WriteLine(item.FlightDate);
-                        }
-                    }
-                    break;
-                case "Flightid":
-                    foreach (var item in Flights)
-                    {
-                        if (item.FlightID == int.Parse(filterValue))
-                        {
-                            Console.WriteLine(item.ToString());
-                        }
-                    }
-                    break;
-            }
-        }
+
+
+
     }
 }
