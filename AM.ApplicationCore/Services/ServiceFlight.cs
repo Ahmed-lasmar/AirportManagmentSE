@@ -3,6 +3,7 @@ using AM.ApplicationCore.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using System.Text;
 using System.Threading.Tasks;
 
@@ -157,8 +158,24 @@ namespace AM.ApplicationCore.Services
         public Func<string,double> DurationAverageDel;
         public ServiceFlight()
         {
-            FlightDetailsDel = ShowFlightDetails;
-            DurationAverageDel = DurationAverage;
+            //FlightDetailsDel = ShowFlightDetails;
+            //DurationAverageDel = DurationAverage;
+            FlightDetailsDel = p => {
+                var query = from flight in Flights
+                            where flight.Plane == p
+                            select flight;
+                foreach (var item in query)
+                {
+                    Console.WriteLine(item.FlightDate);
+                    Console.WriteLine(item.Destination);
+                }
+            };
+            DurationAverageDel = d => {
+                var query = from flight in Flights
+                            where flight.Destination == d
+                            select flight.EstimatedDuration;
+                return query.Average();
+            };
         }
     }
 }
