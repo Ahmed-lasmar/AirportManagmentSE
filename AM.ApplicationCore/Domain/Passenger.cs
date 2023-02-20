@@ -19,6 +19,7 @@ namespace AM.ApplicationCore.Domain
         //{
         //    return first_name == FirstName && last_name == LastName;
         //}
+        
         public bool CheckProfile(string first_name, string last_name,string mail = null)
         {
             if ( mail !=null )

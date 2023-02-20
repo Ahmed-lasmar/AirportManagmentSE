@@ -52,5 +52,13 @@ internal class Program
         //serviceFlight.DestinationGroupedFlights();
         //serviceFlight.FlightDetailsDel(TestData.BoingPlane);
         //Console.WriteLine( serviceFlight.DurationAverageDel("Paris"));
+
+        Passenger passenger= new Passenger{
+            FirstName="ahmed",
+            LastName="lasmar"
+        };
+        Console.WriteLine(passenger.FirstName+" "+passenger.LastName);
+        passenger.UpperFullName();
+        Console.WriteLine(passenger.FirstName + " " + passenger.LastName);
     }
 }
