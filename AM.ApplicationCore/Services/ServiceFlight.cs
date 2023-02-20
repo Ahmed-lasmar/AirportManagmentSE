@@ -140,17 +140,25 @@ namespace AM.ApplicationCore.Services
         }
         public double DurationAverage(string destination)
         {
-            var query = from flight in Flights
-                        where flight.Destination == destination
-                        select flight.EstimatedDuration;
-            return query.Average();
+            //var query = from flight in Flights
+            //            where flight.Destination == destination
+            //            select flight.EstimatedDuration;
+            //return query.Average();
+
+            var queryLambda = Flights.Where((f)=>f.Destination==destination)
+                    .Select(f=>f.EstimatedDuration);
+            return queryLambda.Average();
+
         }
         public IEnumerable<Flight> OrderedDurationFlights()
         {
-            var query = from flight in Flights
-                        orderby flight.EstimatedDuration descending
-                        select flight;
-            return query;
+            //var query = from flight in Flights
+            //            orderby flight.EstimatedDuration descending
+            //            select flight;
+            //return query;
+
+            var queryLambda = Flights.OrderByDescending(f => f.EstimatedDuration);
+            return queryLambda.ToList();
         }
 
         public IEnumerable<Traveller> SeniorTravellers(Flight flight)
@@ -159,6 +167,8 @@ namespace AM.ApplicationCore.Services
                         orderby traveler.BirthDate
                         select traveler;
             return query.Take(3);
+
+
         }
         public IEnumerable<IGrouping<string, Flight>> DestinationGroupedFlights()
         {
