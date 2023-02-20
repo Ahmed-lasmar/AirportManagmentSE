@@ -13,28 +13,40 @@ namespace AM.ApplicationCore.Services
     {
         public List<Flight> Flights { get; set; } = new List<Flight>();
 
-        //public List<DateTime> GetFlightDates(string destination)
+        public List<DateTime> GetFlightDates(string destination)
+        {
+            //List<DateTime> result = new List<DateTime>();
+            //for (int i = 0;i<Flights.Count();i++)
+            //{
+            //    if (Flights[i].Destination == destination)
+            //    {
+            //        result.Add(Flights[i].FlightDate);
+            //    }
+            //}
+            //return result;
+
+
+            //var query = from flight in Flights
+            //            where flight.Destination == destination
+            //            select flight.FlightDate;
+            //return query.ToList();
+
+
+            var queryLambda = Flights.Where(f => f.Destination == destination).Select(f=>f.FlightDate);
+            return queryLambda.ToList();
+        }
+        //public void GetFlightDates(string destination)
         //{
-        //    //List<DateTime> result = new List<DateTime>();
-        //    //for (int i = 0;i<Flights.Count();i++)
+        //    //foreach (var item in Flights)
         //    //{
-        //    //    if (Flights[i].Destination == destination)
+        //    //    if (item.Destination == destination)
         //    //    {
-        //    //        result.Add(Flights[i].FlightDate);
+        //    //        Console.WriteLine(item.FlightDate);
         //    //    }
         //    //}
-        //    //return result;
+
+            
         //}
-        public void GetFlightDates(string destination)
-        {
-            foreach (var item in Flights)
-            {
-                if (item.Destination == destination)
-                {
-                    Console.WriteLine(item.FlightDate);
-                }
-            }
-        }
 
         public void GetFlights(string filterType, string filterValue)
         {
