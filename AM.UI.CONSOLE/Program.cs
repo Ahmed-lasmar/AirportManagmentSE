@@ -57,7 +57,7 @@ internal class Program
             FirstName="ahmed",
             LastName="lasmar"
         };
-        Console.WriteLine(passenger.FirstName+" "+passenger.LastName);
+        Console.WriteLine(passenger.FirstName + " " + passenger.LastName);
         passenger.UpperFullName();
         Console.WriteLine(passenger.FirstName + " " + passenger.LastName);
     }
