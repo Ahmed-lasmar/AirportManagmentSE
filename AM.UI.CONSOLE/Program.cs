@@ -51,6 +51,6 @@ internal class Program
         //foreach (var item in serviceFlight.GetFlightDates("Paris"))
         //serviceFlight.DestinationGroupedFlights();
         //serviceFlight.FlightDetailsDel(TestData.BoingPlane);
-        Console.WriteLine( serviceFlight.DurationAverageDel("Paris"));
+        //Console.WriteLine( serviceFlight.DurationAverageDel("Paris"));
     }
 }
