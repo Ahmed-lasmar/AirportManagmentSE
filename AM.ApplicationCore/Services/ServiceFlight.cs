@@ -25,12 +25,10 @@ namespace AM.ApplicationCore.Services
             //}
             //return result;
 
-
             //var query = from flight in Flights
             //            where flight.Destination == destination
             //            select flight.FlightDate;
             //return query.ToList();
-
 
             var queryLambda = Flights.Where(f => f.Destination == destination)
                                      .Select(f=>f.FlightDate);
@@ -104,26 +102,37 @@ namespace AM.ApplicationCore.Services
 
         public IEnumerable<DateTime> GetFlightdates(string destination)
         {
-            var query = from flight in Flights
-                        where flight.Destination == destination
-                        select flight.FlightDate;
-            return query;
+            //var query = from flight in Flights
+            //            where flight.Destination == destination
+            //            select flight.FlightDate;
+            //return query;
+
+            var queryLambda = Flights.Where(f => f.Destination == destination)
+                                     .Select(f=> f.FlightDate);
+            return queryLambda.ToList();
         }
 
         public int ProgrammedFlightNumber(DateTime startDate)
         {
-            var query = from flight in Flights
-                        where flight.FlightDate >= startDate && flight.FlightDate <= startDate.AddDays(7)
-                        select flight;
-            return query.Count();
+            //var query = from flight in Flights
+            //            where flight.FlightDate >= startDate && flight.FlightDate <= startDate.AddDays(7)
+            //            select flight;
+            //return query.Count();
+            var queryLambda = Flights.Where(f=>f.FlightDate>= startDate && f.FlightDate<=startDate.AddDays(7))
+                                     .Count();
+            return queryLambda;
         }
 
         public void ShowFlightDetails(Plane plane)
         {
-            var query = from flight in Flights
-                        where flight.Plane == plane
-                        select flight;
-            foreach (var item in query)
+            //var query = from flight in Flights
+            //            where flight.Plane == plane
+            //            select flight;
+
+            var queryLambda= Flights.Where(f=>f.Plane==plane)
+                .Select(f=>f);
+
+            foreach (var item in queryLambda)
             {
                 Console.WriteLine(item.FlightDate);
                 Console.WriteLine(item.Destination);
