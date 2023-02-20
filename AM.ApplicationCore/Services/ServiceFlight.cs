@@ -163,18 +163,24 @@ namespace AM.ApplicationCore.Services
 
         public IEnumerable<Traveller> SeniorTravellers(Flight flight)
         {
-            var query = from traveler in flight.Passengers.OfType<Traveller>()
-                        orderby traveler.BirthDate
-                        select traveler;
-            return query.Take(3);
+            //var query = from traveler in flight.Passengers.OfType<Traveller>()
+            //            orderby traveler.BirthDate
+            //            select traveler;
+            //return query.Take(3);
 
-
+            var queryLambda = flight.Passengers.OfType<Traveller>().OrderBy(t => t.BirthDate)
+                .Select(t => t);
+            return queryLambda.ToList();
         }
         public IEnumerable<IGrouping<string, Flight>> DestinationGroupedFlights()
         {
-            var query = from flight in Flights
-                        group flight by flight.Destination;
-            foreach (var group in query)
+            //var query = from flight in Flights
+            //            group flight by flight.Destination;
+
+            var queryLambda = Flights.GroupBy(f => f.Destination)
+                                     .Select(f=>f);
+
+            foreach (var group in queryLambda)
             {
                 Console.WriteLine("Destination " + group.Key);
                 foreach (var item in group)
@@ -182,7 +188,7 @@ namespace AM.ApplicationCore.Services
                     Console.WriteLine("Decollage :" + item.FlightDate);
                 }
             }
-            return query;
+            return queryLambda;
 
 
         }
