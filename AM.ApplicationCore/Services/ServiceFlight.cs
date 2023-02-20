@@ -32,7 +32,8 @@ namespace AM.ApplicationCore.Services
             //return query.ToList();
 
 
-            var queryLambda = Flights.Where(f => f.Destination == destination).Select(f=>f.FlightDate);
+            var queryLambda = Flights.Where(f => f.Destination == destination)
+                                     .Select(f=>f.FlightDate);
             return queryLambda.ToList();
         }
         //public void GetFlightDates(string destination)
