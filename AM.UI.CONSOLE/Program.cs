@@ -49,6 +49,8 @@ internal class Program
         ServiceFlight serviceFlight = new ServiceFlight();
         serviceFlight.Flights = TestData.listFlights;
         //foreach (var item in serviceFlight.GetFlightDates("Paris"))
-        serviceFlight.DestinationGroupedFlights();
+        //serviceFlight.DestinationGroupedFlights();
+        //serviceFlight.FlightDetailsDel(TestData.BoingPlane);
+        //Console.WriteLine( serviceFlight.DurationAverageDel("Paris"));
     }
 }

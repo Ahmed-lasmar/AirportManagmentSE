@@ -153,11 +153,12 @@ namespace AM.ApplicationCore.Services
 
 
         }
-
-
-
-
-
-
+        public Action<Plane> FlightDetailsDel ;
+        public Func<string,double> DurationAverageDel;
+        public ServiceFlight()
+        {
+            FlightDetailsDel = ShowFlightDetails;
+            DurationAverageDel = DurationAverage;
+        }
     }
 }
