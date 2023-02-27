@@ -8,6 +8,7 @@ namespace AM.ApplicationCore.Domain
 {
     public class Flight
     {
+        public int id { get; set; }
         public string Destination { get; set; }
         public string Departure { get; set; }
         public DateTime FlightDate { get; set; }
@@ -15,6 +16,7 @@ namespace AM.ApplicationCore.Domain
         public int FlightID { get; set; }
         public int EstimatedDuration { get; set; }
         public Plane Plane { get; set; }
+        public string Airline { get; set; }
         public ICollection<Passenger> Passengers { get; set; }
         public override string ToString()
         {
