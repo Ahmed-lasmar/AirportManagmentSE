@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace AM.ApplicationCore.Interfaces
 {
-   public interface IServiceFlight: IService<Flight>
+   public interface IServicePassenger: IService<Passenger>
     {
-      public List<Flight>;
-    } 
+       
+    }
 }
